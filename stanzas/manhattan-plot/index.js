@@ -370,20 +370,20 @@ export default class ManhattanPlot extends Stanza {
           if (horizonalDragBegin > horizonalDragEnd) {
             horizonalRange = [
               ((horizonalDragEnd - marginLeft) / areaWidth) *
-                horizonalRangeLength +
-                horizonalRange[0],
+              horizonalRangeLength +
+              horizonalRange[0],
               ((horizonalDragBegin - marginLeft) / areaWidth) *
-                horizonalRangeLength +
-                horizonalRange[0],
+              horizonalRangeLength +
+              horizonalRange[0],
             ];
           } else if (horizonalDragEnd > horizonalDragBegin) {
             horizonalRange = [
               ((horizonalDragBegin - marginLeft) / areaWidth) *
-                horizonalRangeLength +
-                horizonalRange[0],
+              horizonalRangeLength +
+              horizonalRange[0],
               ((horizonalDragEnd - marginLeft) / areaWidth) *
-                horizonalRangeLength +
-                horizonalRange[0],
+              horizonalRangeLength +
+              horizonalRange[0],
             ];
           }
           svg.select("#selector").remove();
@@ -398,21 +398,21 @@ export default class ManhattanPlot extends Stanza {
             const maxLog =
               verticalRange[1] -
               ((verticalDragEnd - paddingTop) / drawAreaHeight) *
-                verticalRangeLength;
+              verticalRangeLength;
             const minLog =
               verticalRange[1] -
               ((verticalDragBegin - paddingTop) / drawAreaHeight) *
-                verticalRangeLength;
+              verticalRangeLength;
             verticalRange = [minLog, maxLog];
           } else if (verticalDragEnd - verticalDragBegin > 0) {
             const maxLog =
               verticalRange[1] -
               ((verticalDragBegin - paddingTop) / drawAreaHeight) *
-                verticalRangeLength;
+              verticalRangeLength;
             const minLog =
               verticalRange[1] -
               ((verticalDragEnd - paddingTop) / drawAreaHeight) *
-                verticalRangeLength;
+              verticalRangeLength;
             verticalRange = [minLog, maxLog];
           }
           reRender(this._variants);
@@ -471,8 +471,8 @@ export default class ManhattanPlot extends Stanza {
                 delta = (parseFloat(slider.attr("x")) - marginLeft) * -1;
               } else if (
                 parseFloat(slider.attr("x")) +
-                  parseFloat(slider.attr("width")) +
-                  delta >
+                parseFloat(slider.attr("width")) +
+                delta >
                 width
               ) {
                 delta =
@@ -487,8 +487,8 @@ export default class ManhattanPlot extends Stanza {
                   "left",
                   ((horizonalRange[0] + move) /
                     getRangeLength(horizonalRange)) *
-                    areaWidth +
-                    "px"
+                  areaWidth +
+                  "px"
                 )
                 .style("display", "block");
               setRange([horizonalRange[0] + move, horizonalRange[1] + move]);
@@ -505,8 +505,8 @@ export default class ManhattanPlot extends Stanza {
                 delta = (parseFloat(slider.attr("x")) - marginLeft) * -1;
               } else if (
                 parseFloat(slider.attr("x")) +
-                  parseFloat(slider.attr("width")) +
-                  delta >
+                parseFloat(slider.attr("width")) +
+                delta >
                 width
               ) {
                 delta =
@@ -678,7 +678,7 @@ export default class ManhattanPlot extends Stanza {
 
       maxLogP = Math.max(...pValueArray);
       if (maxLogPInt === undefined) {
-        maxLogPInt = Math.floor(maxLogP);
+        maxLogPInt = Math.ceil(maxLogP);
       }
 
       if (verticalRange[0] === undefined) {
@@ -714,7 +714,7 @@ export default class ManhattanPlot extends Stanza {
         .attr("cx", function (d) {
           return (
             ((d.pos - horizonalRange[0]) / getRangeLength(horizonalRange)) *
-              areaWidth +
+            areaWidth +
             marginLeft
           );
         })
@@ -722,7 +722,7 @@ export default class ManhattanPlot extends Stanza {
           const logValue = Math.log10(parseFloat(d[pValueKey])) * -1;
           return (
             ((verticalRange[1] - logValue) / getRangeLength(verticalRange)) *
-              drawAreaHeight +
+            drawAreaHeight +
             paddingTop
           );
         })
@@ -766,7 +766,7 @@ export default class ManhattanPlot extends Stanza {
             CHROMOSOME_POSIITONS.hg38[d] + CHROMOSOME_NT_LENGTH.hg38[d] / 2;
           return (
             ((pos - horizonalRange[0]) / getRangeLength(horizonalRange)) *
-              areaWidth +
+            areaWidth +
             marginLeft
           );
         })
@@ -787,14 +787,14 @@ export default class ManhattanPlot extends Stanza {
             return (
               ((chromosomeStartPosition[d] - horizonalRange[0]) /
                 getRangeLength(horizonalRange)) *
-                areaWidth +
+              areaWidth +
               marginLeft
             );
           } else {
             return (
               ((chromosomeStartPosition[d] - horizonalRange[0]) /
                 getRangeLength(horizonalRange)) *
-                areaWidth +
+              areaWidth +
               marginLeft
             );
           }
@@ -832,7 +832,7 @@ export default class ManhattanPlot extends Stanza {
         const y =
           areaHeight -
           ((i - verticalRange[0]) / getRangeLength(verticalRange)) *
-            drawAreaHeight;
+          drawAreaHeight;
         //Calucurate display of scale
         const tickNum = 20; //Tick number to display (set by manual)
         const tickInterval = Math.floor(
@@ -896,12 +896,12 @@ export default class ManhattanPlot extends Stanza {
         .attr(
           "d",
           "M " +
-            (marginLeft - 8) +
-            ", " +
-            areaHeight +
-            " H " +
-            marginLeft +
-            " Z"
+          (marginLeft - 8) +
+          ", " +
+          areaHeight +
+          " H " +
+          marginLeft +
+          " Z"
         );
 
       // slider
@@ -937,13 +937,11 @@ export default class ManhattanPlot extends Stanza {
             `
             M ${marginLeft} ${areaHeight}
             L ${width} ${areaHeight}
-            L ${
-              (horizonalRange[1] / chromosomeSumLength.hg38) * areaWidth +
-              marginLeft
+            L ${(horizonalRange[1] / chromosomeSumLength.hg38) * areaWidth +
+            marginLeft
             } ${height + 10}
-            L ${
-              (horizonalRange[0] / chromosomeSumLength.hg38) * areaWidth +
-              marginLeft
+            L ${(horizonalRange[0] / chromosomeSumLength.hg38) * areaWidth +
+            marginLeft
             } ${height + 10}
             z
           `
@@ -968,9 +966,9 @@ export default class ManhattanPlot extends Stanza {
           ctx.arc(
             (d.pos / horizonalRangeLength) * areaWidth,
             areaHeight -
-              ((Math.log10(parseFloat(d[pValueKey])) * -1 - lowThresh) *
-                areaHeight) /
-                maxLogPInt,
+            ((Math.log10(parseFloat(d[pValueKey])) * -1 - lowThresh) *
+              areaHeight) /
+            maxLogPInt,
             2,
             0,
             Math.PI * 2
