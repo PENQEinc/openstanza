@@ -50,6 +50,13 @@ class RegionSelectorView {
     (this.#el.getRootNode() as ShadowRoot).appendChild(this.#style);
   }
 
+  updatePosition() {
+    this.#el.setAttribute(
+      "transform",
+      `translate(0 ${Conf.instance.mutationTop})`
+    );
+  }
+
   /**
    * Clear the SVG element content.
    */
@@ -168,6 +175,39 @@ class RegionSelectorView {
    */
   get width() {
     return this.#totalWidth;
+  }
+
+  getAdjustedScaleLabelHeight() {
+    const fragment = new DocumentFragment();
+    const chromosome = Dataset.instance.chromosome;
+
+    const textElements: SVGTextElement[] = [];
+
+    Dataset.instance.ancestors.forEach((ancestor) => {
+      const g = createSVGElement("g", { class: "region-indicator-view" });
+      const text = createSVGElement("text");
+      text.innerHTML = `<tspan>chm${chromosome}:</tspan><tspan>${ancestor.region.start}-${ancestor.region.end}</tspan>`;
+      text.setAttribute("transform", "rotate(-90)");
+      text.style.visibility = "hidden";
+      g.appendChild(text);
+      fragment.appendChild(g);
+      textElements.push(text);
+    });
+
+    this.#el.appendChild(fragment);
+
+    let maxHeight = 0;
+    textElements.forEach((text) => {
+      const bbox = text.getBBox();
+      if (bbox.width > maxHeight) {
+        maxHeight = bbox.width;
+      }
+    });
+
+    // Clean up
+    textElements.forEach((text) => text.remove());
+
+    return maxHeight + 20; // 20px padding
   }
 }
 

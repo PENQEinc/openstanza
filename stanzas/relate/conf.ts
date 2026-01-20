@@ -19,7 +19,13 @@ class Conf {
     return this.#instance;
   }
 
+  #topPaddingOffset = 0;
+
   constructor(private params: Params) {}
+
+  set topPaddingOffset(value: number) {
+    this.#topPaddingOffset = value;
+  }
 
   get haplotypeViewWidth() {
     return Math.max(8, this.params.fontHeightPx);
@@ -28,7 +34,10 @@ class Conf {
     return 4;
   }
   get stagePadding() {
-    return this.params.padding;
+    return {
+      ...this.params.padding,
+      top: Math.max(this.params.padding.top, this.#topPaddingOffset),
+    };
   }
   get clusterWidth() {
     return CLUSTER_WIDTH;

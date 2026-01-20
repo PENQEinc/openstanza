@@ -22,7 +22,8 @@ export default class Relate extends Stanza {
     const analysisID = this.params["data-id"] as string;
     const hammapURL = this.params["data-url"] as string;
 
-    Promise.resolve().then(() => {
+    Promise.resolve().then(async () => {
+      await document.fonts.ready;
       Conf.initialise({
         padding: getMarginsFromCSSString(
           this.css("--togostanza-canvas-padding")

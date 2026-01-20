@@ -4,6 +4,7 @@ import { HaploEthnicities } from "./classes/HaploEthnicities";
 import { HaplotypesView } from "./classes/HaplotypesView";
 import { RegionSelectorView } from "./classes/RegionSelectorView";
 import { StageView } from "./classes/StageView";
+import { Conf } from "./conf";
 
 export async function init({
   root,
@@ -23,6 +24,9 @@ export async function init({
   const haplotypesView = HaplotypesView.initialise(root);
   const regionSelectorView = RegionSelectorView.initialise(root);
   const dendrogramView = DendrogramView.initialise(root);
+  Conf.instance.topPaddingOffset =
+    regionSelectorView.getAdjustedScaleLabelHeight();
+  regionSelectorView.updatePosition();
 
   dendrogramView.clear();
 
