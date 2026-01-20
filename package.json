@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "license": "MIT",
   "repository": "https://github.com/togostanza/openstanza",
+  "scripts": {
+    "start": "togostanza serve",
+    "build": "togostanza build"
+  },
   "dependencies": {
     "d3": "^6.7.0",
     "togostanza": "^3.0.0-beta.56",
@@ -14,7 +18,10 @@
     "eslint-config-prettier": "^8.3.0"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
+  },
+  "overrides": {
+    "sass": "1.77.8"
   },
   "private": true
 }

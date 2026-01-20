@@ -40,6 +40,7 @@ export type Ancestor = {
  * Class representing a dataset containing haplotypes, mutations, and ancestor information.
  */
 class Dataset {
+  #id: string = "";
   #haplotypes: string[] = [];
   #mutations: Mutation[] = [];
   #ancestors: Ancestor[] = [];
@@ -75,6 +76,7 @@ class Dataset {
    */
   async init(id: string, folderURL: string) {
     console.log("init", id, folderURL);
+    this.#id = id;
     const path = `${folderURL}${id}`;
     try {
       const [ancData, mutData, hapData] = await loadFiles(
@@ -275,6 +277,11 @@ class Dataset {
 
   get mutationsByHaplotype() {
     return this.#mutationsByHaplotype;
+  }
+
+  get chromosome() {
+    const match = this.#id.match(/chr(\d+)/);
+    return match ? match[1] : "";
   }
 }
 

@@ -103,7 +103,8 @@ class RegionSelectorView {
         "transform",
         `translate(${this.#totalWidth} -20) rotate(-90)`
       );
-      text.innerHTML = `<tspan>${i}</tspan><tspan> ${ancestor.region.start}-${ancestor.region.end}</tspan>`;
+      const chromosome = Dataset.instance.chromosome;
+      text.innerHTML = `<tspan>chm${chromosome}:</tspan><tspan>${ancestor.region.start}-${ancestor.region.end}</tspan>`;
 
       // Add data-region attribute
       regionIndicator.setAttribute("data-region", `${i}`);
