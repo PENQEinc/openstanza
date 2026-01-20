@@ -16,12 +16,13 @@ main {
     font-size: calc(var(--togostanza-fonts-font_size_primary) * 1px);
     font-weight: var(--togostanza-fonts-font_weight_primary);
   }
+
   &:has(.region-indicator-view:hover),
   &.-selectedregion {
     --fadeout-opacity: 0.1;
 
-    .haplotype-view > g[data-region],
-    #RegionSelectorView > .scale,
+    .haplotype-view>g[data-region],
+    #RegionSelectorView>.scale,
     .region-indicator-view {
       opacity: var(--fadeout-opacity);
     }
@@ -29,9 +30,10 @@ main {
 }
 
 #DendrogramView {
-  & > g {
+  &>g {
     position: relative;
-    & > line {
+
+    &>line {
       stroke: black;
       stroke-width: 1px;
 
@@ -40,7 +42,7 @@ main {
       }
     }
 
-    & > circle {
+    &>circle {
       fill: black;
       cursor: pointer;
     }
@@ -49,6 +51,7 @@ main {
   .labels {
     transition: ease-in-out var(--transition-duration);
   }
+
   .labels-bg {
     fill: white;
     opacity: 0.8;
@@ -57,10 +60,11 @@ main {
 
 #HaplotypesView {
   &:has(.haplotype-view:hover) {
-    > .haplotype-view {
+    >.haplotype-view {
       opacity: 0.2;
     }
   }
+
   g[data-index] {
     transition: ease-in-out var(--long-transition-duration);
   }
@@ -69,22 +73,24 @@ main {
     &:hover {
       opacity: 1 !important;
     }
-    > g {
-      > .bg {
+
+    >g {
+      >.bg {
         fill: #f8f8f8;
       }
     }
+
     .checkbox {
       cursor: pointer;
       user-select: none;
       transition: ease-in-out var(--long-transition-duration);
 
-      > text {
-        > tspan:nth-child(1) {
+      >text {
+        >tspan:nth-child(1) {
           font-weight: bold;
         }
 
-        > tspan.haplotype {
+        >tspan.haplotype {
           font-weight: 350;
           font-size: 0.85em;
         }
@@ -94,8 +100,9 @@ main {
         }
       }
 
-      > rect.checkbox-bg {
+      >rect.checkbox-bg {
         fill: transparent;
+
         &.-selected {
           fill: var(--selected-color);
         }
@@ -105,28 +112,24 @@ main {
 }
 
 #RegionSelectorView {
-  > path.scale {
+  >path.scale {
     stroke: #0008;
     stroke-width: 0.5px;
     stroke-dasharray: 1, 1;
   }
 
-  > .region-indicator-view {
+  >.region-indicator-view {
     cursor: pointer;
 
-    > path {
+    >path {
       stroke: #0008;
       stroke-width: 0.5px;
       fill: transparent;
     }
 
-    > text {
+    >text {
       text-anchor: start;
       dominant-baseline: middle;
-
-      > tspan:nth-child(1) {
-        font-weight: bold;
-      }
     }
   }
 }
@@ -136,7 +139,7 @@ main {
   visibility: hidden;
   transition: opacity 0.2s;
 
-  > div#TooltipText {
+  >div#TooltipText {
     padding: 5px;
     background: #fff;
     border: 1px solid #000;

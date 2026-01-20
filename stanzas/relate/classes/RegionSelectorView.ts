@@ -211,7 +211,7 @@ class RegionSelectorView {
 
   #getScaleLabelHTML(ancestor: Ancestor): string {
     const chromosome = Dataset.instance.chromosome;
-    return `<tspan>chm${chromosome}:</tspan>:&nbsp;<tspan>${ancestor.region.start}&nbsp;-&nbsp;${ancestor.region.end}</tspan>`;
+    return `<tspan>${chromosome}:</tspan>&nbsp;<tspan>${ancestor.region.start}&nbsp;-&nbsp;${ancestor.region.end}</tspan>`;
   }
 }
 
