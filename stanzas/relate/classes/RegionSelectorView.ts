@@ -1,4 +1,4 @@
-import { Dataset } from "./Dataset";
+import { Dataset, type Ancestor } from "./Dataset";
 import { DendrogramView } from "./DendrogramView.js";
 import { Conf } from "../conf";
 import { createSVGElement } from "../util.js";
@@ -110,8 +110,7 @@ class RegionSelectorView {
         "transform",
         `translate(${this.#totalWidth} -20) rotate(-90)`
       );
-      const chromosome = Dataset.instance.chromosome;
-      text.innerHTML = `<tspan>chm${chromosome}:</tspan><tspan>${ancestor.region.start}-${ancestor.region.end}</tspan>`;
+      text.innerHTML = this.#getScaleLabelHTML(ancestor);
 
       // Add data-region attribute
       regionIndicator.setAttribute("data-region", `${i}`);
@@ -186,7 +185,7 @@ class RegionSelectorView {
     Dataset.instance.ancestors.forEach((ancestor) => {
       const g = createSVGElement("g", { class: "region-indicator-view" });
       const text = createSVGElement("text");
-      text.innerHTML = `<tspan>chm${chromosome}:</tspan><tspan>${ancestor.region.start}-${ancestor.region.end}</tspan>`;
+      text.innerHTML = this.#getScaleLabelHTML(ancestor);
       text.setAttribute("transform", "rotate(-90)");
       text.style.visibility = "hidden";
       g.appendChild(text);
@@ -208,6 +207,11 @@ class RegionSelectorView {
     textElements.forEach((text) => text.remove());
 
     return maxHeight + 20; // 20px padding
+  }
+
+  #getScaleLabelHTML(ancestor: Ancestor): string {
+    const chromosome = Dataset.instance.chromosome;
+    return `<tspan>chm${chromosome}:</tspan>:&nbsp;<tspan>${ancestor.region.start}&nbsp;-&nbsp;${ancestor.region.end}</tspan>`;
   }
 }
 
