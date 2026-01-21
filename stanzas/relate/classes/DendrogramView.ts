@@ -176,7 +176,7 @@ class DendrogramView {
     const y = e.target.cy.baseVal.value;
 
     Tooltip.instance?.show(
-      `Alleles: ${mutation.alleles.join(", ")}\nPosition: ${mutation.snp}`,
+      `Alleles: ${mutation.alleles.join(", ")}\nPosition: ${mutation.posOfSnp}`,
       x + Conf.instance.stagePadding.left,
       y + Conf.instance.haplotypeViewWidth / 2
     );
