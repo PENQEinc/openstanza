@@ -28,7 +28,7 @@ export async function init({
   const regionSelectorView = RegionSelectorView.initialise(root);
   const dendrogramView = DendrogramView.initialise(root);
 
-  datasetSummaryEl.innerHTML = `Chromosome: ${Dataset.instance.chromosome}, Position: ${Dataset.instance.ancestors[0].region.start} - ${Dataset.instance.mutationTotalLength}`;
+  datasetSummaryEl.innerHTML = `Chromosome: ${Dataset.instance.chromosome}, Position: ${Dataset.instance.ancestors[0].region.start} - ${Dataset.instance.mutationTotalLength}, SNPs: ${Dataset.instance.mutations.length}`;
   Conf.instance.topPaddingOffset =
     regionSelectorView.getAdjustedScaleLabelHeight();
   regionSelectorView.updatePosition();
