@@ -103,7 +103,10 @@ class RegionSelectorView {
         x2
       );
 
-      path?.setAttribute("d", `M ${x2} 0 L ${this.#totalWidth} -20`);
+      path?.setAttribute(
+        "d",
+        `M ${x2} -2 L ${this.#totalWidth} -18 M ${x1 + 0.5} -2 L ${x3 - 0.5} -2 `
+      );
 
       const text = regionIndicator.querySelector("text")!;
       text.setAttribute(
