@@ -176,9 +176,9 @@ class DendrogramView {
     const y = e.target.cy.baseVal.value;
 
     Tooltip.instance?.show(
-      `Alleles: ${mutation.alleles.join(", ")}\nPosition: ${mutation.posOfSnp}`,
+      `Alleles: ${mutation.alleles.join("/")}\nPosition: ${mutation.posOfSnp}`,
       x + Conf.instance.stagePadding.left,
-      y + Conf.instance.haplotypeViewWidth / 2
+      y + Conf.instance.haplotypeViewWidth / 2 + 16
     );
   };
 
@@ -469,7 +469,7 @@ class DendrogramView {
       const circle = createSVGElement("circle", {
         cx: x,
         cy: y,
-        r: 2,
+        r: 3,
         class: "mutation",
       });
       this.#inner.appendChild(circle);

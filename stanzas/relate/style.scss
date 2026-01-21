@@ -48,7 +48,9 @@ main {
     }
 
     &>circle {
-      fill: black;
+      fill: white;
+      stroke: black;
+      stroke-width: 2px;
       cursor: pointer;
     }
   }
