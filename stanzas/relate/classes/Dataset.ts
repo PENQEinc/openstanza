@@ -35,6 +35,7 @@ export type Region = {
 export type Ancestor = {
   branches: Branch[];
   region: Region;
+  position: Region;
 };
 /**
  * Class representing a dataset containing haplotypes, mutations, and ancestor information.
@@ -149,6 +150,18 @@ class Dataset {
       };
     });
 
+    const positions = startNumbers.map((start, index) => {
+      const startPos = this.#mutations[start].posOfSnp;
+      const endPos = startNumbers[index + 1]
+        ? this.#mutations[startNumbers[index + 1] - 1].posOfSnp
+        : this.#mutations[this.#mutations.length - 1].posOfSnp;
+
+      return {
+        start: startPos,
+        end: endPos,
+      };
+    });
+
     this.#ancestors = treesRawData.map((tree, index) => {
       const treeData = tree.match(/:\s*(.+)/)![1];
 
@@ -179,7 +192,7 @@ class Dataset {
           branch.children = children;
         }
       }
-      return { branches, region: regions[index] };
+      return { branches, region: regions[index], position: positions[index] };
     });
   }
 

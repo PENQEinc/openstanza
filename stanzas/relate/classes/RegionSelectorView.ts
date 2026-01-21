@@ -210,7 +210,7 @@ class RegionSelectorView {
   }
 
   #getScaleLabelHTML(ancestor: Ancestor): string {
-    return `<tspan>${ancestor.region.start}&nbsp;-&nbsp;${ancestor.region.end}</tspan>`;
+    return `<tspan>${ancestor.position.start}&nbsp;-&nbsp;${ancestor.position.end}</tspan>`;
   }
 }
 
