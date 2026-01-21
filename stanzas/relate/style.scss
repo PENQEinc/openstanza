@@ -58,11 +58,6 @@ main {
   .labels {
     transition: ease-in-out var(--transition-duration);
   }
-
-  .labels-bg {
-    fill: white;
-    opacity: 0.8;
-  }
 }
 
 #HaplotypesView {

@@ -505,7 +505,7 @@ class DendrogramView {
     const step = getNiceStep(maxX - x0, this.#gridN);
 
     const labelsG = createSVGElement("g", {
-      transform: `translate(${x0}, ${-this.#gridLabelYMargin})`,
+      transform: `translate(${x0}, ${10})`,
       class: "labels",
     });
 
@@ -533,18 +533,6 @@ class DendrogramView {
     }
 
     this.#grid.appendChild(labelsG);
-
-    const { width: labelsGWidth, height: labelsGHeight } = labelsG.getBBox();
-
-    const labelsBg = createSVGElement("rect", {
-      x: -1,
-      y: -1,
-      width: labelsGWidth + 1,
-      height: labelsGHeight + 1,
-      class: "labels-bg",
-    });
-
-    labelsG.insertBefore(labelsBg, labelsG.firstChild);
   }
 
   #updateLabelsPositions = (e: any) => {
@@ -556,16 +544,15 @@ class DendrogramView {
     }
 
     if (scrollTop < Conf.instance.stagePadding.top) {
-      labelsG.setAttribute(
-        "transform",
-        `translate(${this.#x0}, ${-this.#gridLabelYMargin})`
-      );
+      labelsG.setAttribute("transform", `translate(${this.#x0}, ${10})`);
       return;
     }
 
     labelsG.setAttribute(
       "transform",
-      `translate(${this.#x0}, ${scrollTop - Conf.instance.stagePadding.top})`
+      `translate(${this.#x0}, ${
+        scrollTop - Conf.instance.stagePadding.top + 18
+      })`
     );
   };
 }
