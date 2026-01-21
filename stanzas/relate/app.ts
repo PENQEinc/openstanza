@@ -6,14 +6,17 @@ import { RegionSelectorView } from "./classes/RegionSelectorView";
 import { StageView } from "./classes/StageView";
 import { Conf } from "./conf";
 
+// Force recompile: corrected signature
 export async function init({
   root,
   folderURL,
+  datasetSummaryEl,
   hapmapFileURL,
   id,
 }: {
   root: HTMLElement;
   folderURL: string;
+  datasetSummaryEl: HTMLElement;
   hapmapFileURL: string;
   id: string;
 }) {
@@ -24,6 +27,8 @@ export async function init({
   const haplotypesView = HaplotypesView.initialise(root);
   const regionSelectorView = RegionSelectorView.initialise(root);
   const dendrogramView = DendrogramView.initialise(root);
+
+  datasetSummaryEl.innerHTML = `Chromosome: ${Dataset.instance.chromosome}, Position: ${Dataset.instance.ancestors[0].region.start} - ${Dataset.instance.mutationTotalLength}`;
   Conf.instance.topPaddingOffset =
     regionSelectorView.getAdjustedScaleLabelHeight();
   regionSelectorView.updatePosition();

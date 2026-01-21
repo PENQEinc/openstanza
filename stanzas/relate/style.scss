@@ -29,6 +29,11 @@ main {
   }
 }
 
+.dataset-summary {
+  font-size: 14px;
+  font-weight: bold;
+}
+
 #DendrogramView {
   &>g {
     position: relative;

@@ -1,5 +1,5 @@
 import Stanza from "togostanza/stanza";
-import { init } from "./main";
+import { init } from "./app";
 import { getMarginsFromCSSString } from "../../lib/utils";
 import { Conf } from "./conf";
 import { appendCustomCss } from "togostanza-utils";
@@ -33,7 +33,17 @@ export default class Relate extends Stanza {
         ),
       });
 
-      init({ root, folderURL, hapmapFileURL: hammapURL, id: analysisID });
+      const datasetSummaryEl =
+        this.element.shadowRoot?.querySelector("#dataset-summary");
+      if (!datasetSummaryEl) return;
+
+      init({
+        root,
+        datasetSummaryEl: datasetSummaryEl as HTMLElement,
+        folderURL,
+        hapmapFileURL: hammapURL,
+        id: analysisID,
+      });
     });
   }
 }
